@@ -107,16 +107,63 @@ let obj = {
 // console.log(str)
 
 
-let newObj = new Proxy(obj,{//代理对象
-    get(targetObj,key,value){
-        console.log('获取值')
-        return targetObj[key]
-    },
-    set(targetObj,key,newValue){
-        console.log('设置值')
-        targetObj[key] = newValue
+// let newObj = new Proxy(obj,{//代理对象
+//     get(targetObj,key,value){
+//         console.log('获取值')
+//         return targetObj[key]
+//     },
+//     set(targetObj,key,newValue){
+//         console.log('设置值')
+//         targetObj[key] = newValue
+//     }
+// })
+// newObj.name = 'lisi'
+// newObj.sex = 'man'
+// console.log(obj.sex,'-----')
+const PENDING = Symbol.for('pending')
+const FULLFIELD = Symbol.for('fullfield')
+const REJECT = Symbol.for('reject')
+
+class MyPromis{
+   constructor(excuter){
+        this.status = PENDING
+        this.value = undefined
+        this.error = undefined
+        this.success = undefined
+        this.errorfn = undefined
+        excuter(this.resolve.bind(this),this.reject.bind(this))
+   }
+   resolve(value){
+       console.log('777')
+        if(this.status !== PENDING){
+            return
+        }
+        this.status = Symbol.for('fullfield')
+        this.value = value 
+        this.success(this.value)
+   }
+   reject(e){
+       console.log('888')
+    if(this.status !== PENDING){
+        return
     }
+    this.status = Symbol.for('reject')
+    this.error = e 
+    //this.errorfn(this.error)
+   }
+   then(success,fail){
+       this.success = success
+       this.errorfn = fail
+   }
+}
+let myprom1 = new MyPromis((resolve,reject)=>{
+    console.log('666')
+
+    setTimeout(()=>{
+        resolve(19)
+    },3000)
+
 })
-newObj.name = 'lisi'
-newObj.sex = 'man'
-console.log(obj.sex,'-----')
+myprom1.then((res)=>{
+    console.log(res,'----------')
+}).then(()=>{})
