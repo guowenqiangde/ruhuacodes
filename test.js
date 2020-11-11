@@ -154,6 +154,7 @@ class MyPromis{
    then(success,fail){
        this.success = success
        this.errorfn = fail
+       return new MyPromis((resolve,reject)=>{resolve(19)})
    }
 }
 let myprom1 = new MyPromis((resolve,reject)=>{
