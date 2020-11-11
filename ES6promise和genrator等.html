@@ -1,0 +1,129 @@
+﻿<html lang="zh-CN"><head>
+    <meta charset="UTF-8">
+    <title>ES6知识点</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#2B3A42">
+    <style>
+        html,body,div{
+            margin:0;
+            padding:0;
+        }
+    </style>
+    
+  </head>
+<body>
+    <div id="img_container">
+        <img src="./images/占位图.png" data="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=3363295869,2467511306&fm=26&gp=0.jpg" width=500 height=500 />
+    </div>
+
+    <script>
+        //图片添加案例
+        // function loadImg(img,path){
+        //     console.log(img,path,'-------')
+        //     new Promise((resolve,reject)=>{
+        //         setTimeout(()=>{
+        //             var image = new Image()
+        //             image.src = path
+        //             image.onload = function(){
+        //                 //img.replaceChild(image,img.children[0]);
+        //                 resolve(img.replaceChild(image,img.children[0]))
+        //             }
+        //         },5000)
+        //     })
+        // }
+        // loadImg(img_container,img_container.children[0].getAttribute('data'))
+        //迭代器案例
+        // let str = '1804A';
+        // for(let value of str){
+        //     console.log(value)
+        // }
+        // let arr = [1,8,0,4,'a']
+        // for(let value of arr){
+        //     console.log(value)
+        // }
+        // let obj = {
+        //     name:'zhangsan',
+        //     age:18,
+        //     [Symbol.iterator]:function* (){
+        //         for(let key in obj){
+        //             yield `${key}=>${obj[key]}`
+        //         }
+        //     }
+        // }
+        // for(let value of obj){
+        //     console.log(value)
+        // }
+
+        // let prom1 = new Promise((resolve,reject)=>{
+        //     setTimeout(()=>{
+        //         resolve(10)
+        //     },2000)
+        // })
+
+        //generator函数讲解
+        // let myfirst;
+        // let i = 0;
+        // function haoshi1(){
+        //     setTimeout(()=>{
+        //         console.log('haoshi1')
+        //         myfirst.next('a')
+        //     },1000)
+        // }
+        // function haoshi2(){
+        //     setTimeout(()=>{
+        //         console.log('haoshi2')
+        //         myfirst.next('b')
+        //     },1000)
+        // }
+        // function haoshi3(){
+        //     setTimeout(()=>{
+        //         console.log('haoshi3')
+        //         myfirst.next('c')
+        //     },1000)
+        // }
+        // function* mygenerator(){
+        //        let a = yield haoshi1()
+        //        console.log(a,'11111111')
+        //        let b = yield haoshi2()
+        //        console.log(b,'2222222')
+        //        let c = yield haoshi3()
+        //        console.log(c,'333333')
+        // }
+        // myfirst = mygenerator()
+        // console.log(myfirst.next())
+        // console.log(myfirst.next())
+        // console.log(myfirst.next())
+        // console.log(myfirst.next())
+        // console.log(myfirst.next())
+
+        //async和await讲解
+        function haoshi1(){
+            return new Promise((resolve,reject)=>{
+                setTimeout(()=>{
+                    //console.log('haoshi1')
+                    resolve('haoshi111111111111111111111')
+                },1000)
+            })
+ 
+        }
+        function haoshi2(){
+            setTimeout(()=>{
+                console.log('haoshi2')
+            },1000)
+        }
+        function haoshi3(){
+            setTimeout(()=>{
+                console.log('haoshi3')
+            },1000)
+        }
+        async function add(){
+           let a =  await  haoshi1();
+           console.log(a)
+            await  haoshi2();
+            await  haoshi3();
+        }
+        add()
+    </script>
+</body>
+</html>
